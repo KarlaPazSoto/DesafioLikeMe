@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const { obtenerPosts, agregarPost } = require('./consultas');
 const portfinder = require('portfinder');
+const port = 3456;
 
 const app = express();
 
@@ -33,4 +34,8 @@ app.post('/posts', async (req, res) => {
     }
 });
 
-app.listen(3000, console.log("¡Servidor encendido!"));
+
+app.listen(port, () => {
+    console.log(`Example app listening on port ${port}
+    visit: http://localhost:${port}`);
+  });
