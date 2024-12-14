@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const { obtenerPosts, agregarPost } = require('./consultas');
+const { obtenerPosts, agregarPost, modificarPosts, eliminarPost } = require('./consultas');
 const portfinder = require('portfinder');
 const port = 3456;
 
@@ -34,6 +34,28 @@ app.post('/posts', async (req, res) => {
     }
 });
 
+app.put('/posts/likes/:id', async (req, res) => {
+    const {id} = req.params;
+    const {likes} = req.body;
+    try{
+        await modificarPosts(id,likes);
+        res.send('Post modificado correctamente.');
+    }catch(error){
+        console.error('Error al modificar el post.', error);
+        res.status(500).json({error: 'Error al modificar el post'});
+    }
+});
+
+app.delete('/posts/:id', async(req, res) => {
+    const {id} = req.params;
+    try{
+        await eliminarPost(id);
+        res.send('Post eliminado correctamente.');
+    }catch(error) { 
+        console.error('Error al eliminar el post.', error);
+        res.status(500).json({error: 'Error al eliminar el post.'});
+    }
+});
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}

@@ -24,11 +24,12 @@ function App() {
     getPosts();
   };
 
-  // este método se utilizará en el siguiente desafío
-  const like = async (id) => {
-    await axios.put(urlBaseServer + `/posts/like/${id}`);
-    getPosts();
-  };
+   //este método se utilizará en el siguiente desafío
+   const like = async (id) => {
+     await axios.put(urlBaseServer + `/posts/like/${id}`);
+     getPosts();
+   };
+
 
   // este método se utilizará en el siguiente desafío
   const eliminarPost = async (id) => {

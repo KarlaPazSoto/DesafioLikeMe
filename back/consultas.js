@@ -25,9 +25,34 @@ const obtenerPosts = async () => {
     }
 };
 
-obtenerPosts();
+const modificarPosts = async (id, likes) => { 
+    const consulta = 'UPDATE posts SET likes = $1 WHERE id = $2';
+    const values = [likes, id];
+    
+    try{
+        const result = await pool.query(consulta, values);
+        console.log('Post modificado.')
+    }catch(error) {
+        console.error('Error al modificar el post.', error);
+        throw error;
+    }
+};
+
+const eliminarPost = async (id) => {
+    const consulta = 'DELETE FROM posts WHERE id = $1';
+    const values = [id];
+
+    try{
+        const result = await pool.query(consulta, values);
+    }catch (error){
+        console.error('Error al eliminar el post.', error);
+        throw error;
+    }
+};
 
 module.exports = {
     agregarPost,
-    obtenerPosts
+    obtenerPosts,
+    modificarPosts,
+    eliminarPost
 };
