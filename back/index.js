@@ -34,11 +34,10 @@ app.post('/posts', async (req, res) => {
     }
 });
 
-app.put('/posts/likes/:id', async (req, res) => {
+app.put('/posts/like/:id', async (req, res) => {
     const {id} = req.params;
-    const {likes} = req.body;
     try{
-        await modificarPosts(id,likes);
+        await modificarPosts(id);
         res.send('Post modificado correctamente.');
     }catch(error){
         console.error('Error al modificar el post.', error);
